@@ -1,4 +1,4 @@
-pip list // The pip list command returns the list of packages in the current environment.
+pip list // The pip list command returns the list of all frameworks(packages) in the current environment.
 deactivate //deactivate the enviroment and return to the main command display
 pip3 list // the number of packages when i deactivate my environment will be less.
 pip install django==2.2.4 // install the virsion 2.2.4 django package
