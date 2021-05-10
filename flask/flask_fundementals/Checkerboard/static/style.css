@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    
+    margin: auto;
+    padding-top: 100px;
+    width: fit-content;
+}
+
+body .row {
+    display: flex;
+    width: fit-content;
+}
+
+body .cell {
+    height: 50px;
+    width: 50px;
+}

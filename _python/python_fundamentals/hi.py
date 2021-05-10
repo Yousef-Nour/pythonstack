@@ -1,18 +1,11 @@
-# function sum(x,y){
-#     var s = x + y;
-#     return s;
-# }
-
-def sum(x=4, y=5):
-    s = x + y
-    return s
-# print (sum(5, 6))
-
-# a = 3
-# b = 4
-# s = sum(a, b)
-# print(s)
-
-print(sum())   #9
-print(sum(3))   #8
-print(sum(y=3)) #7
+n = input()
+s = set(map(int, raw_input().split()))
+for i in range(n):
+    j = input().spilt()
+    if j[0]=="remove":
+        s.remove(int(j[1]))
+    elif j[0]=="discard":
+        s.remove(int(j[1]))
+    else:
+        s.pop()
+print(sum(list(s)))
