@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+</head>
+<body>
+    <form method="POST" action="/result">
+        {% csrf_token %}  
+        <table>
+            <tr>
+                <td>Your Name:</td><td><input type="text" name="name"></td>
+            </tr>
+    
+            <tr>
+                <td>Dojo Location:</td>
+                <td><select name="dojo_location" id="dojo_location">
+                    <option value="san_jose">San Jose</option>
+                    <option value="palestine">Palestine</option>
+                    </select>
+                </td>
+            </tr>
+    
+            <tr>
+                <td>Favorite Language:</td>
+                <td><select name="favorite_language" id="language">
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="c++">C++</option>
+                    </select>
+                </td>
+            </tr>
+    
+            <tr>
+                <td colspan="2">Comment:</td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea name="comment"></textarea></td>
+                <td></td>
+            </tr>
+    
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Button"></td>
+            </tr>
+    
+        </table>
+    </form>
+
+</body>
+</html>
