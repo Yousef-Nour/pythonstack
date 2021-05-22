@@ -1,0 +1,34 @@
+import random
+from django.shortcuts import redirect, render
+
+# Create your views here.
+def index(request):
+    if 'gold' not in request.session: 
+        request.session['gold'] = 0   #gold=0
+    
+    if 'activities' not in request.session:
+        request.session['activities'] = []
+    
+    # context = {
+    #     'gold': request.session['gold']
+    # }
+    return render(request,'index.html')
+
+def process(request):
+
+    
+    if request.POST['place'] == 'Farm':
+        num = random.randint(10, 20)
+        s = f"earned {num} from the farm"
+        request.session['gold'] += num
+        request.session['activities'].append(s)
+    
+    if request.POST['place'] == 'Cave':
+        request.session['gold'] += random.randint(5, 10)
+
+    if request.POST['place'] == 'House':
+        request.session['gold'] += random.randint(2, 5)
+    if request.POST['place'] == 'Casino':
+        request.session['gold'] += random.randint(-50, 50)
+
+    return redirect('/')

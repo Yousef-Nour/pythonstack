@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold Game</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'style.css' %}"> 
+</head>
+<body>
+    Your Gold  <input  id="gold" type="text" value='{{request.session.gold}}'>
+    <main>
+        <form action="process_money" method="POST" style="border: 2px solid black;width: 150px;">
+        {% csrf_token %}
+            <div class="place">
+                <h2>Farm</h2>
+                <h4>(earns 10-20 golds)</h4>
+                <input type="hidden" name="place" value="Farm">
+                <input type="submit" value="Find Gold!">
+
+            </div>
+         </form>
+
+    <form action="process_money" method="POST" style="border: 2px solid black; width: 150px;">
+        {% csrf_token %}
+        <div class="place">
+            <h2>Cave</h2>
+            <h4>(earns 5-10 golds)</h4>
+            <input type="hidden" name="place" value="Cave" >
+            <input type="submit" value="Find Gold!">
+        </div>
+    </form>
+
+    <form action="process_money" method="POST" style="border: 2px solid black;width: 150px;">
+        {% csrf_token %}
+        <div class="place">
+            <h2>House</h2>
+            <h4>(earns 2-5 golds)</h4>
+            <input type="hidden" name="place" value="House">
+            <input type="submit" value="Find Gold!">
+        </div>
+    </form>
+
+    <form action="process_money" method="POST" style="border: 2px solid black;width: 150px;">
+        {% csrf_token %}
+        <div class="place">
+            <h2>Casino</h2>
+            <h4>(earns 0-50 golds)</h4>
+            <input type="hidden" name="place" value="Casino">
+            <input type="submit" value="Find Gold!">
+        </div>
+    </form>
+
+    </main>
+
+    <div contenteditable="false" style ="width: 850px;max-height:200px;
+    overflow-y:scroll; border:solid black 1px;">
+        
+        {% for activity in request.session.activities %}
+            <p>{{activity}}</p>
+        {% endfor %}
+
+        
+    </div>
+    
+</body>
+</html>
