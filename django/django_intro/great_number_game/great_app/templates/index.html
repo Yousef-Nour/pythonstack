@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Number Game</title>
+</head>
+<body>
+    <h1>Welcome</h1>
+    <h4>I am thinking in a number between 1 to 100</h4><br>
+    <h4>Take a Guess!</h4>
+    <form action="/process_guess" method="POST" style="background-color: {{color}};">
+        {% csrf_token %}
+        <p>{{string}}</p>
+        <input type="number" name="guess"><br>
+        <input type="submit" value="Submit"  name="submit">
+    </form>
+
+
+</body>
+</html>
