@@ -1,0 +1,121 @@
+>>> from books_authors_app.models import *
+>>> c_sharp = Book.objects.create(title="C Sharp", desc="Programming Language")
+>>> java = Book.objects.create(title="Java", desc="programming Language")
+>>> python = Book.objects.create(title="Python", desc="Programming Language")
+>>> php = Book.objects.create(title="PHP", desc="Programming Language")
+>>> ruby = Book.objects.create(title="Ruby", desc="Programming Language")
+
+>>> Book.objects.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>
+>>>
+
+>>> jane_austen = Auther.objects.create(first_name="Jane", last_name="Austen")
+>>> emily_dickinson = Auther.objects.create(first_name="Emily", last_name="Dickinson")
+>>> fyodor_dostoevsky = Auther.objects.create(first_name="Fyodor", last_name="Dostoevsky")
+>>> william_shakespeare = Auther.objects.create(first_name="William", last_name="Shakespeare")
+>>> lau_tzu = Auther.objects.create(first_name="Lau", last_name="Tzu")
+
+>>> Auther.objects.all()
+<QuerySet [<Auther: Auther object (1)>, <Auther: Auther object (2)>, <Auther: Auther object (3)>, <Auther: Auther object (4)>, <Auther: Auther object (5)>]>
+>>>
+
+##Adding notes in Auther
+
+(djangoPy3Env) C:\Users\sleet\Desktop\python_stack\pythonstack\django\django_orm\books_authors_proj>python manage.py makemigrations
+You are trying to add a non-nullable field 'notes' to auther without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> None
+Migrations for 'books_authors_app':
+  books_authors_app\migrations\0002_auther_notes.py
+    - Add field notes to auther
+
+
+>>> var = Book.objects.get(title="C Sharp")
+>>> var.title="C#"
+>>> var.title
+'C#'
+>>> var.save()
+>>>
+
+
+b1 = Book.objects.first()
+>>> yousef = Auther.objects.first()
+>>> yousef.writers.add(b1)
+>>>
+
+
+>>> b2=Book.objects.get(id=2)
+>>> yousef.writers.add(b2)
+>>> yousef.writers.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+
+
+
+## Query: Assign the second author to the first 3 books??
+
+>>> b1=Book.objects.first()
+>>> yousef = Auther.objects.get(id=2)
+>>> yousef.writers.add(b1)
+>>> yousef.writers.all()
+<QuerySet [<Book: Book object (1)>]>
+
+>>> b2=Book.objects.get(id=2)
+>>> yousef=Auther.objects.get(id=2)
+>>> yousef.writers.add(b2)
+>>> yousef.writers.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+
+>>> b3=Book.objects.get(id=3)
+>>> yousef=Auther.objects.get(id=2)
+>>> yousef.writers.add(b3)
+>>> yousef.writers.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>]>
+>>>
+
+
+##Query: Assign the third author to the first 4 books???
+
+>>> b1=Book.objects.get(id=1)
+>>> y=Auther.objects.get(id=3)
+>>> y.writers.add(b1)
+
+>>> b2=Book.objects.get(id=2)
+>>> y=Auther.objects.get(id=3)
+>>> y.writers.add(b2)
+>>>
+>>> b3=Book.objects.get(id=3)
+>>> y=Auther.objects.get(id=3)
+>>> y.writers.add(b3)
+>>>
+>>> b4=Book.objects.get(id=4)
+>>> y=Auther.objects.get(id=3)
+>>> y.writers.add(b4)
+>>>
+>>> y.writers.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+>>>
+
+
+###Query: Assign the fourth author to the first 5 books (or in other words, all the books)???
+
+>>> y=Auther.objects.get(id=4)
+>>> for book in Book.objects.all():
+...     y.writers.add(book)
+...
+>>> y.writers.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>
+>>>
+
+####Query: Remove the first author of the 3rd book
+>>> b3=Book.objects.get(id=3)
+>>> b3.authers.first()
+<Auther: Auther object (2)>
+
+
+
