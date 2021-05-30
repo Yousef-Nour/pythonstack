@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #welcome_head{
+            float: left;
+        }
+        #logout_url{
+            float:right;
+        }
+        .clear_fix{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 id="welcome_head">Success! Welcome, {{request.session.first_name}}</h1>
+            <br>
+            {% if messages %}
+            <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+            {% endif %}
+            <br>
+            <a id="logout_url" href="/logout">Logout</a>
+        </div>
+        <div class="clear_fix">
+            <hr>
+        </div>
+    </header>
+    
+    <h1>Add a favourite book</h1>
+    <form action="/add_book" method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Book Title" required><br>
+        <input type="text" name="description" placeholder="Description"><br>
+        <input type="submit" value="Add Book">
+    </form>
+
+    <section>
+        <h1>All Books</h1>
+        {% for book in books %}
+            <p><a href="/books/{{book.id}}">{{book.title}}</a></p>
+            <p>Added by {{book.uploader.first_name}}{{book.uploader.last_name}}</p>
+            {% if book in fav_books %}
+                <p>This is one of your favourites</p>
+            {% else %}
+                <p><a href="/books/add_to_fav/{{book.id}}">Add to favourites</a></p>
+            {% endif %}
+            <br>
+        
+        {% endfor %}
+
+    </section>
+</body>
+</html>

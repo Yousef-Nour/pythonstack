@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 id="welcome_head">Success! Welcome, {{request.session.first_name}}</h1>
+            <br>
+            {% if messages %}
+            <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+            {% endif %}
+            <br>
+            <a id="logout_url" href="/logout">Logout</a>
+        </div>
+        <div class="clear_fix">
+            <hr>
+        </div>
+    </header>
+        <section>
+        
+        {% if request.session.id == book.uploader.id %}
+            <form action="/books/{{book.id}}/update" method="POST">
+                {% csrf_token %}
+                <input type="text" name="title" placeholder="{{book.title}}">
+                <p>Added by: {{book.uploader.first_name}} {{book.uploader.last_name}}</p>
+                <p>Added on: {{book.created_at}}</p>
+                <p>Last updated on: {{book.updated_at}}</p>
+                Description:<textarea name="description" placeholder="{{book.desc}}" cols="30" rows="10"></textarea>
+                <input type="submit" value="Update">
+                <a href="/books/{{book.id}}/destroy">Delete</a>
+            </form>
+        
+        {% else %}
+            <h1>{{book.title}}</h1>
+            <p>Added by: {{book.uploader.first_name}} {{book.uploader.last_name}}</p>
+            <p>Added on: {{book.created_at}}</p>
+            <p>Last updated on: {{book.updated_at}}</p>
+            <p>Description: {{book.desc}}</p>
+
+        {% endif %}
+    </section>
+
+    <section>
+        <ul>
+            <li>
+                <h1>User Who Like This Book</h1>
+            </li>
+            {% for liker in book.likers.all %}
+            <li>{{liker.first_name}} {{liker.last_name}}</li>
+            {% endfor %}
+
+        </ul>
+        
+
+    </section>
+    
+</body>
+</html>
