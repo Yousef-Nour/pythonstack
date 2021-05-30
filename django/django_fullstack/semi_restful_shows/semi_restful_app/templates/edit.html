@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semi Restfull TV Shows</title>
+</head>
+<body>
+    <h1>Edit Show</h1> 
+    <a href="/shows">Go Back</a>
+    <form action="/shows/{{id}}/edit" method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" value="{{all_series.title}}"placeholder="Title"><br>
+        <input type="text" name="network" value={{all_series.network}} placeholder="Net Work">
+        <input type="date" name="release_date" value={{all_series.release_date}} placeholder="Release Date"><br>
+        <textarea name="desc"cols="30" rows="10" value={{all_series.desc}} placeholder="Description"></textarea><br>
+        <input type="submit" value="Create" name="submit">
+
+    </form>
+</body>
+</html>
