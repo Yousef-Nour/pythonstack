@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+</head>
+<body>
+    <h6>Coding Dojo Wall</h6>
+    <p>Welcome {{}}</p>
+    <a href="/log_out">Logoff</a>
+    
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    
+    <title>Document</title>
+
+</head>
+<body>
+    
+
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">CodingDojo Wall</span>
+          <span class="navbar-brand mb-0 h1">Welcome{{name}} <a href="#">log off</a></span>
+          
+        </div>
+    </nav>
+      <br>
+      <br>
+      <h3>Post a message</h3>
+      
+      <form action="add_message" method="POST">
+          {% csrf_token %}
+        <div class="form-floating">
+            <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">message</label>
+        </div>
+        <br>
+
+        <button type="submit" class="btn btn-primary btn-lg">Post a message</button>
+        </form>
+        {% for message in all_messages%}
+       <h3>{{message.user.first_name}}</h3> 
+        <h1>{{message.message_text}}</h1>
+        
+            {% for comment in message.comment_messages.all %}
+            <p>{{comment.comment_text}} {{comment.user.first_name}}</p> 
+            
+            
+            {% endfor %}
+
+            <form action="add_comment" method="POST">
+                {% csrf_token %}
+            <div class="form-floating">
+                <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">comment</label>
+                <input type="hidden" name="message" value="{{message.id}}">
+            </div>
+            <br>
+    
+            <button type="submit" class="btn btn-primary btn-lg">Comment</button>
+            </form>
+            
+            
+
+        
+        {% endfor %}
+
+
+
+        
+
+
+    
+
+
+    
+</body>
+</html>
